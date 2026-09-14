@@ -4,6 +4,25 @@ A cross-platform SVG viewer. Software-rendered, no GPU init, built to open from 
 
 **Stack:** [winit](https://github.com/rust-windowing/winit) + [softbuffer](https://github.com/rust-windowing/softbuffer) + [resvg](https://github.com/linebender/resvg)
 
+## Install (macOS)
+
+After a GitHub release exists:
+
+```sh
+brew tap corkscrews/savage https://github.com/Corkscrews/savage
+brew install --cask savage
+```
+
+If macOS quarantines the download (the app is not Apple-notarized yet):
+
+```sh
+brew install --cask --no-quarantine savage
+```
+
+Publish a cask build with `./script/package-macos.sh`, then `git tag v0.1.0 && git push origin v0.1.0`. CI uploads `Savage-<version>-macos.zip` and bumps `Casks/savage.rb`.
+
+To land in core Homebrew (`brew install --cask savage` with no tap), submit `Casks/savage.rb` to [homebrew-cask](https://github.com/Homebrew/homebrew-cask) after the app is notarized.
+
 ## Run
 
 ```sh
@@ -22,9 +41,10 @@ The OS launches Savage and passes the file. On Linux and Windows that is `argv`.
 
 ### macOS
 
+Prefer Homebrew (see above). From a source checkout:
+
 ```sh
-chmod +x packaging/macos/bundle.sh
-./packaging/macos/bundle.sh
+./script/install.sh
 ```
 
 Then: right-click any `.svg` → **Get Info** → **Open with** → Savage → **Change All**.

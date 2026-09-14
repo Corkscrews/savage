@@ -6,6 +6,7 @@
 # Keep Cargo.lock for this binary so CI and installs are reproducible.
 
 # Bundled / packaged artifacts
+/dist/
 *.app
 *.dmg
 *.AppImage

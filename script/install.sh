@@ -15,21 +15,12 @@ root=$(CDPATH= cd -- "$(dirname "$0")/.." && pwd)
 bin="$root/target/release/savage"
 staged="$root/target/Savage.app"
 dest="${SAVAGE_INSTALL_DIR:-/Applications}/Savage.app"
-plist="$root/packaging/macos/Info.plist"
-
-if [ ! -f "$plist" ]; then
-  echo "missing $plist" >&2
-  exit 1
-fi
+assemble="$root/packaging/macos/assemble-app.sh"
 
 echo "Building savage (release)..."
 cargo build --release --manifest-path "$root/Cargo.toml"
 
-rm -rf "$staged"
-mkdir -p "$staged/Contents/MacOS"
-cp "$bin" "$staged/Contents/MacOS/savage"
-chmod +x "$staged/Contents/MacOS/savage"
-cp "$plist" "$staged/Contents/Info.plist"
+"$assemble" "$bin" "$staged"
 
 echo "Installing $dest"
 if [ -w "$(dirname "$dest")" ]; then

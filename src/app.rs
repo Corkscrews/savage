@@ -11,7 +11,7 @@ use winit::window::{Window, WindowId};
 
 use crate::document::{self, Document};
 use crate::platform;
-use crate::render;
+use crate::render::{self, Renderer};
 use crate::UserEvent;
 
 const DEFAULT_SIZE: LogicalSize<f64> = LogicalSize::new(800.0, 600.0);
@@ -21,6 +21,7 @@ pub struct App {
     pending_path: Option<PathBuf>,
     document: Option<Document>,
     error: Option<String>,
+    renderer: Renderer,
     // Drop surface before context/window (struct fields drop in declaration order).
     surface: Option<softbuffer::Surface<Rc<Window>, Rc<Window>>>,
     context: Option<softbuffer::Context<Rc<Window>>>,
@@ -33,6 +34,7 @@ impl App {
             pending_path: None,
             document: None,
             error: None,
+            renderer: Renderer::new(),
             surface: None,
             context: None,
             window: None,
@@ -118,7 +120,8 @@ impl App {
         };
 
         if let Some(document) = &self.document {
-            render::rasterize(&document.tree, width.get(), height.get(), &mut buffer);
+            self.renderer
+                .rasterize(&document.tree, width.get(), height.get(), &mut buffer);
         } else {
             render::fill_empty(&mut buffer);
         }
