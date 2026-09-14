@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=Savage
+Comment=Lightweight SVG viewer
+Exec=savage %F
+TryExec=savage
+Icon=savage
+Terminal=false
+StartupNotify=true
+MimeType=image/svg+xml;
+Categories=Graphics;Viewer;2DGraphics;
+Keywords=svg;vector;image;

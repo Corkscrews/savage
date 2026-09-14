@@ -1,0 +1,49 @@
+# Rust
+/target/
+**/*.rs.bk
+*.pdb
+
+# Keep Cargo.lock for this binary so CI and installs are reproducible.
+
+# Bundled / packaged artifacts
+*.app
+*.dmg
+*.AppImage
+*.exe
+*.msi
+*.deb
+*.rpm
+
+# OS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Editors / tooling
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+*~
+.direnv/
+.envrc
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# Debug / coverage
+*.log
+*.profraw
+lcov.info
+cobertura.xml
+tarpaulin-report.html

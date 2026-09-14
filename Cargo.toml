@@ -1,0 +1,30 @@
+[package]
+name = "savage"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.85"
+description = "Extremely fast, lightweight SVG viewer"
+license = "MIT OR Apache-2.0"
+readme = "README.md"
+keywords = ["svg", "viewer", "image"]
+categories = ["graphics", "multimedia::images"]
+
+[dependencies]
+resvg = "0.48"
+softbuffer = "0.4"
+winit = { version = "0.30", default-features = false, features = ["rwh_06"] }
+
+[target.'cfg(any(target_os = "linux", target_os = "freebsd", target_os = "netbsd", target_os = "openbsd"))'.dependencies]
+winit = { version = "0.30", default-features = false, features = [
+    "rwh_06",
+    "x11",
+    "wayland",
+    "wayland-dlopen",
+    "wayland-csd-adwaita",
+] }
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+panic = "abort"
+strip = true
